@@ -19,6 +19,8 @@ let main args =
     let webApp =
         choose [
             route "/" >=> htmlFile "./Views/index.html"
+            route "/generateAST" >=> htmlFile "./Routes/generateAST.fs"
+
             // your other routes
         ]
     app.UseGiraffe(webApp)
