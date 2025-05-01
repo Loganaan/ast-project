@@ -18,7 +18,7 @@ let main args =
     // app.MapGet("/", Func<string>(fun () -> "Hello World!")) |> ignore
     let webApp =
         choose [
-            route "/" >=> htmlFile "./wwwroot/index.html"
+            route "/" >=> htmlFile "./Views/index.html"
             // your other routes
         ]
     app.UseGiraffe(webApp)
