@@ -31,7 +31,7 @@ let fromFile (filename : string) =
                failwithf "%s in file %s near line %d, column %d\n" 
                   (exn.Message) filename (pos.Line+1) pos.Column
 
-(* Exercise it *)
+(* Exercise it *) 
 
 let e1 = fromString "5+7";;
 let e2 = fromString "let f x = x + 7 in f 2 end";;
