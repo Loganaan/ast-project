@@ -5,6 +5,7 @@ open Microsoft.Extensions.Hosting
 
 open Parse
 open Fun
+open GenerateAST
 
 [<EntryPoint>]
 let main args =
@@ -19,7 +20,7 @@ let main args =
     let webApp =
         choose [
             route "/" >=> htmlFile "./Views/index.html"
-            route "/generateAST" >=> htmlFile "./Routes/generateAST.fs"
+            route "/generateAST" >=> POST >=> GenerateAST.parseHandler
 
             // your other routes
         ]

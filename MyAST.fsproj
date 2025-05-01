@@ -20,6 +20,8 @@
 
     <Compile Include="Parse.fs" />
 
+    <Compile Include="Routes/GenerateAST.fs" />
+
     <Compile Include="Program.fs" />
   </ItemGroup>
 
