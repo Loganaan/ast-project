@@ -20,7 +20,7 @@ let main args =
     let webApp =
         choose [
             route "/" >=> htmlFile "./Views/index.html"
-            route "/generateAST" >=> POST >=> GenerateAST.parseHandler
+            route "/GenerateAST" >=> POST >=> GenerateAST.parseHandler
 
             // your other routes
         ]

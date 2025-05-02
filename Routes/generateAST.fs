@@ -1,13 +1,29 @@
 module GenerateAST
 
+open Microsoft.AspNetCore.Http
+open System.Web
+open Giraffe
+open Absyn
+open Parse  
 open Fun
 
-let parseHandler =
+let parseHandler : HttpHandler =
     fun (next: HttpFunc) (ctx: HttpContext) ->
         task {
-            let! input = ctx.BindModelAsync<string>() // Get user input from POST body
-            let parsedAst = run input // Process MicroML AST
-            return! json parsedAst next ctx // Return AST as JSON
+            use reader = new System.IO.StreamReader(ctx.Request.Body)
+            let! input = reader.ReadToEndAsync()
+            let decodedInput = HttpUtility.UrlDecode(input)
+
+            let prefix = "treeInput="
+            let cleanedInput = decodedInput.Substring(prefix.Length)
+            printfn "Input: %s" cleanedInput
+
+            
+            
+            let parsedExpr = Parse.fromString cleanedInput  // parse to Absyn.expr
+            printfn "Parsed: %A" parsedExpr
+            let result = run parsedExpr                     // evaluate it
+            return! json result next ctx                    // return JSON
         }
-    
+
 
